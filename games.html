@@ -28,7 +28,7 @@
                     <a class="nav-link" href="#">Games <span class="sr-only">(current)</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Side Projects</a>
+                    <a class="nav-link" href="#">Other Projects</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact Me</a>
@@ -54,6 +54,7 @@
                         <div class="col-sm">
 
                             <h3 class="card-title">Meteor</h3>
+                            <h5 class="card-subtitle mb-2 text-muted">University Project</h5>
                             <h5 class="card-subtitle mb-2 text-muted">C#, Unity</h5>
 
                             <h5 class="mt-4">What is Meteor?</h5>
@@ -138,10 +139,10 @@
 
                     <h5>Links</h5>
                     <p class="card-text">
-
-                        <a href="https://youtu.be/TLNFHSudNa0" class="alert-link">Gameplay Demonstration</a><br>
-                        <a href=" https://github.com/benf223/Meteor" class="alert-link">Source Code (GitHub)</a>
-
+                        <p> <a href=" https://github.com/benf223/Meteor" class="alert-link">Source Code (GitHub)</a>
+                        </p>
+                        <iframe src="https://www.youtube.com/embed/TLNFHSudNa0" width="560" height="315" frameborder="0"
+                            allowfullscreen></iframe>
                     </p>
 
                 </div>
@@ -160,6 +161,7 @@
                     <div class="col-sm">
 
                         <h3 class="card-title">2D Animation</h3>
+                        <h5 class="card-subtitle mb-2 text-muted">University Project</h5>
                         <h5 class="card-subtitle mb-2 text-muted">Java, OpenGL2</h5>
 
                         <h5 class="mt-4">What is this?</h5>
@@ -196,8 +198,8 @@
 
                 <h5>Links</h5>
                 <p class="card-text">
-                        <iframe src="https://www.youtube.com/embed/UclSZClHs80"
-                        width="560" height="315" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/UclSZClHs80" width="560" height="315" frameborder="0"
+                        allowfullscreen></iframe>
                 </p>
 
 
@@ -214,8 +216,8 @@
 
                     </div>
                     <div class="col-sm">
-
                         <h3 class="card-title">3D Solar System</h3>
+                        <h5 class="card-subtitle mb-2 text-muted">University Project</h5>
                         <h5 class="card-subtitle mb-2 text-muted">Java, OpenGL2</h5>
 
                         <h5 class="mt-4">What is it?</h5>
@@ -243,8 +245,74 @@
 
                 <h5>Links</h5>
                 <p class="card-text">
-                    <a href=" https://www.youtube.com/watch?v=-l-nivLNrEI" class="alert-link">Video Demonstration</a><br>
+                    <iframe src="https://www.youtube.com/embed/-l-nivLNrEI" width="560" height="315" frameborder="0"
+                        allowfullscreen></iframe>
                 </p>
+            </div>
+        </div>
+
+        <!-- 3D ZOMBIE HELICOPTER SCENE -->
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-auto">
+                        <img class="mb-3" src="images/3dhelicopter.png" alt="Card image cap" width="468px" height="317px">
+
+                    </div>
+                    <div class="col-sm">
+
+                        <h3 class="card-title">3D Helicopter Zombie Scene</h3>
+                        <h5 class="card-subtitle mb-2 text-muted">University Project</h5>
+                        <h5 class="card-subtitle mb-2 text-muted">Java, OpenGL2</h5>
+
+                        <h5 class="mt-4">What is it?</h5>
+                        <p>This is the third and final assignment of the computer graphics course. We were tasked to
+                            create a 3D scene that has a camera flying around the scene. I decided to make a helicopter
+                            fly around an abandoned town full of zombies. And of course, you were able to shoot them
+                            with rockets.</p>
+
+
+                    </div>
+                </div>
+                <h5>Main Features and Implementation?</h5>
+                <h5 class="text-muted">The Helicopter Model</h5>
+                <p>The helicopter model consisted of glut solid cubes and one glu sphere for the body. Each
+                    part of the helicopter had its own class that was all included in the main helicopter
+                    class. This helicopter class handled the scaling and positions of where all the parts
+                    should be using push and pop matrices. Some of the classes such as the tail had other
+                    shapes included it in for the tail blade. It made sense in hierarchal modelling, which also
+                    made things a lot easier, as if I were to move the tail, then the tail blade would also
+                    move along with it.</p>
+                <h5 class="text-muted">Movement</h5>
+                <p>The forward movement of the helicopter is based on the tilt angle of the helicopter. So, pressing
+                    the forward button will tilt the helicopter forward, and vice versa with the backwards key. This
+                    felt similar to how games like Grand Theft Auto does their forward movements with helicopters, and
+                    I was happy with it. Though, the other controls such as strafing and rotating left/right didn’t
+                    feel the same as how the forward movement worked. </p>
+
+                <h5 class="text-muted">Shooting</h5>
+                <p>One of the main features were shooting rockets. The rockets were spawned using an object pool
+                    managed by the helicopter class. When shot, the rocket would have an applied velocity, and an angle
+                    the same as the helicopter when it was shot. When collided with the ground, buildings or the
+                    boundaries of the map, the rocket would spawn an explosion. The explosion would interpolate in size
+                    and detect collision for zombies using bounding spheres. </p>
+
+                <h5 class="text-muted">Zombies</h5>
+                <p>Zombies were modelled with just two glut solid cubes. One for the body, and one for the head. The
+                    head was textured with a stone wall, and coloured green. The zombies were managed like a particle
+                    system where if they died, they would respawn somewhere random in the map. The AI was very simple,
+                    as they would just walk in a single direction, and when contact with a wall, they would walk the
+                    opposite direction. </p>
+
+                <h5>What did I learn?</h5>
+                <p></p>
+
+                <h5>Links</h5>
+                <p class="card-text">
+                    <iframe src="https://www.youtube.com/embed/TRkf31bk_Wg" width="560" height="315" frameborder="0"
+                        allowfullscreen></iframe>
+                </p>
+
             </div>
         </div>
 

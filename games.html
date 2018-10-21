@@ -37,8 +37,291 @@
         </div>
     </nav>
 
+
+
+
     <div class="container">
         <h2 class="mt-5 mb-3">Games (and similar)</h2>
+
+        <!-- PHYSICS DEFENSE GAME -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-auto">
+                        <img class="mb-3" src="images/ja2dpsg.png" alt="Card image cap" width="640" height="360px">
+
+                    </div>
+                    <div class="col-sm">
+
+                        <h3 class="card-title">Just Another 2D Platformer Shooter Game (JA2DPSG)</h3>
+                        <h5 class="card-subtitle mb-2 text-muted">University Project</h5>
+                        <h5 class="card-subtitle mb-2 text-muted">C++, SDL</h5>
+
+                        <h5 class="mt-4">What is it?</h5>
+                        <p>JA2DPSG is a 2D platformer shooter game where the play must shoot their way through 10
+                            levels of enemies. The game had a much bigger vision where there were more weapons, more
+                            complex combat system and smarter AI. But in the end due to slackness, the game only had
+                            one weapon with infinite ammunition which is the only thing that can deal damage. Weapon
+                            throwing and picking up is implemented, where thrown weapons were supposed to kill, but now
+                            serves as nothing but a cool physics object.
+                        </p>
+                    </div>
+                </div>
+                <h5>Main Features and Implementation</h5>
+                <h5 class="text-muted">Box2D</h5>
+                <p>I wanted the game to be a physics-based game, mostly because I just really love physics in games so
+                    I decided to implement Box2D into game. I haven’t developed anything using Box2D before, except for
+                    game engines that uses Box2D as their physics engine, but all the code was already done for it, so
+                    having to learn Box2D from scratch took a long time, but it was worth it. I used many resources
+                    such as the official documentation, forums and YouTube videos, but the one that helped me the most
+                    was iforce2d.net (iforce2d, 2011) where the author has a lot of tutorials and guides for different
+                    aspects of Box2D..</p>
+                <h5 class="text-muted">Movement</h5>
+                <p>Movement was done by applying a linear impulse to the object. The force applied was calculated by
+                    subtracting the current object’s velocity with the max movement speed. This was necessary so that
+                    the object won’t gradually increase speed overtime and will have constant speed instead. This is
+                    similar to just setting the object’s velocity but will feel smoother as there will the speed will
+                    gradually change from zero to its max speed. The friction of the object also needed a lot of
+                    tweaking to get the feel that I wanted.</p>
+
+                <h5 class="text-muted">Object Pooling</h5>
+                <p>The shooting direction is calculated by taking the current mouse position and subtracting it with
+                    the player’s position. This gives a direction vector that is normalized and multiplied with a force
+                    value which is then passed into the apply linear impulse function of the body of the bullet object.
+                    The bullet object is physics object with the isBullet enabled on its body so that it uses
+                    continuous collision detection. The bullet’s rotation is set to be the same as its velocity, until
+                    it is collided with an object. This sets it to be decayable where the alpha value will linear
+                    interpolate to zero, then will disable itself. </p>
+
+                <h5 class="text-muted">Gore Effects</h5>
+                <p>The gore effects of the enemy use a mix of animated sprites, particle effects, physics objects and
+                    gore sounds. The particle effects consisted of two different shades of red, and applies a simple
+                    explosive effect. The physics objects consist of 5 objects. The head and the 4 corners of the
+                    enemy’s body. When the bullet collides with the enemy, the enemy is despawned and the gore effects
+                    are applied. The body parts are roughly spawned on the same location as their counterpart body, and
+                    then a force is applied to it to have a dismemberment body explosion effect. The force is
+                    calculated depending on the bullet’s location when it collides with the enemy. </p>
+
+                <h5 class="text-muted">AI</h5>
+                <p>I used the State Design Pattern to handle the AI states for the game. This is where each state is a
+                    singleton class derived from an interface with 3 methods; Enter, Execute and Exit. Enemies have a
+                    state variable that holds the current state. <br>
+                    The first state the enemy will be in is the find weapon state. It searches the game for all the
+                    active weapons and will then move towards the closest one. If the weapon is above the enemy, then
+                    they’ll jump up. Once they’re next to the weapon, they will pick it up and then change to the
+                    follow player state. <br>
+                    In the follow player state, they will move towards the player’s position until the x difference is
+                    within the certain value. If it is, then they will change states to the aiming state. <br>
+                    In the aiming state, the enemy will gradually aim at the player using linear interpolation from its
+                    current aiming position, to the player’s position. When the position of the aim is near the
+                    player’s position, and the shooting delay has been reached, then the enemy will shoot.
+                </p>
+
+                <h5>What did I learn?</h5>
+                <p>First, I learnt how to use the Box2D library and the core functionality of it, such as bodies,
+                    drawing, fixtures, forces/impulses, movement and collision detection. It took a while to wrap my
+                    head around it, but once I got it working with my game objects, it felt so good that I’ve
+                    implemented physics into my own game.</p>
+                <p> Second, I learnt how to create a state system that doesn’t use just use booleans and enums. Using
+                    the state design pattern allows me to structure my code a lot nicer where the enemy class won’t be
+                    long filled with if conditions and the functionality in them.</p>
+                <p> Overall, this assignment was a great learning experience, where there’s also a lot of things that I
+                    could’ve done to make it better. Like every assignment ever, I always start them late. It’s fine
+                    that I always complete them before, but when it comes to games, I don’t. The game may be completed,
+                    but it has a lot of cut down features, so if I had started earlier, maybe even a week earlier, then
+                    I probably could have finished the game that was visioned at the start.
+
+                </p>
+
+                <h5>Links</h5>
+                <p>
+                    <a class="alert-link" href="https://github.com/awesomealvin/JA2DPSG">Source
+                        Code (GitHub)</a>
+                </p>
+                <p class="card-text">
+                    <iframe src="https://www.youtube.com/embed/3dmvFa-f-f8" width="560" height="315" frameborder="0"
+                        allowfullscreen></iframe>
+                </p>
+
+            </div>
+        </div>
+        <!-- 3D ZOMBIE HELICOPTER SCENE -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-auto">
+                        <img class="mb-3" src="images/3dhelicopter.png" alt="Card image cap" width="468px" height="317px">
+
+                    </div>
+                    <div class="col-sm">
+
+                        <h3 class="card-title">3D Helicopter Zombie Scene</h3>
+                        <h5 class="card-subtitle mb-2 text-muted">University Project</h5>
+                        <h5 class="card-subtitle mb-2 text-muted">Java, OpenGL2</h5>
+
+                        <h5 class="mt-4">What is it?</h5>
+                        <p>This is the third and final assignment of the computer graphics course. We were tasked to
+                            create a 3D scene that has a camera flying around the scene. I decided to make a helicopter
+                            fly around an abandoned town full of zombies. And of course, you were able to shoot them
+                            with rockets.</p>
+                    </div>
+                </div>
+                <h5>Main Features and Implementation?</h5>
+                <h5 class="text-muted">The Helicopter Model</h5>
+                <p>The helicopter model consisted of glut solid cubes and one glu sphere for the body. Each
+                    part of the helicopter had its own class that was all included in the main helicopter
+                    class. This helicopter class handled the scaling and positions of where all the parts
+                    should be using push and pop matrices. Some of the classes such as the tail had other
+                    shapes included it in for the tail blade. It made sense in hierarchal modelling, which also
+                    made things a lot easier, as if I were to move the tail, then the tail blade would also
+                    move along with it.</p>
+                <h5 class="text-muted">Movement</h5>
+                <p>The forward movement of the helicopter is based on the tilt angle of the helicopter. So, pressing
+                    the forward button will tilt the helicopter forward, and vice versa with the backwards key. This
+                    felt similar to how games like Grand Theft Auto does their forward movements with helicopters, and
+                    I was happy with it. Though, the other controls such as strafing and rotating left/right didn’t
+                    feel the same as how the forward movement worked. </p>
+
+                <h5 class="text-muted">Shooting</h5>
+                <p>One of the main features were shooting rockets. The rockets were spawned using an object pool
+                    managed by the helicopter class. When shot, the rocket would have an applied velocity, and an angle
+                    the same as the helicopter when it was shot. When collided with the ground, buildings or the
+                    boundaries of the map, the rocket would spawn an explosion. The explosion would interpolate in size
+                    and detect collision for zombies using bounding spheres. </p>
+
+                <h5 class="text-muted">Zombies</h5>
+                <p>Zombies were modelled with just two glut solid cubes. One for the body, and one for the head. The
+                    head was textured with a stone wall, and coloured green. The zombies were managed like a particle
+                    system where if they died, they would respawn somewhere random in the map. The AI was very simple,
+                    as they would just walk in a single direction, and when contact with a wall, they would walk the
+                    opposite direction. </p>
+
+                <h5>What did I learn?</h5>
+                <p>The main thing that I learnt from this project is how to manually apply textures onto a box object.
+                    As the helicopter model had a lot of hierarchal modelling, my knowledge and understanding in push
+                    and pop matrices grew. </p>
+
+                <h5>Links</h5>
+                <p>
+                    <a class="alert-link" href="https://github.com/awesomealvin/Computer-Graphics-A3_3D-Helicopter-Zombie-Scene">Source
+                        Code (GitHub)</a>
+                </p>
+                <p class="card-text">
+                    <iframe src="https://www.youtube.com/embed/TRkf31bk_Wg" width="560" height="315" frameborder="0"
+                        allowfullscreen></iframe>
+                </p>
+
+            </div>
+        </div>
+
+        <!-- 3D SOLAR SYSTEM -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-auto">
+                        <img class="mb-3" src="images/3dsolarsystem.png" alt="Card image cap" width="468px" height="317px">
+
+                    </div>
+                    <div class="col-sm">
+                        <h3 class="card-title">3D Solar System</h3>
+                        <h5 class="card-subtitle mb-2 text-muted">University Project</h5>
+                        <h5 class="card-subtitle mb-2 text-muted">Java, OpenGL2</h5>
+
+                        <h5 class="mt-4">What is it?</h5>
+                        <p>This was the second assignment for the computer graphics course. It focused on 3D models,
+                            hierarchal modelling and camera movement in 3D space.</p>
+
+                        <h5>Main Features and Implementation?</h5>
+                        <h5 class="text-muted">Camera Movement</h5>
+                        <p>The camera movement was the hardest part because moving forwards must take account where the
+                            camera is looking at. I took the hard approach and decided to learn about forward vectors
+                            and all that cross-product stuff when I could’ve just applied simple trigonometry..</p>
+                    </div>
+                </div>
+                <h5 class="text-muted">Push and Pop Matrix</h5>
+                <p>OpenGL had this nice push and pop matrix feature that allowed for hierarchal modelling. It was
+                    easily to understand and implement but is very useful. All the planets revolved around the Sun, so
+                    they were all in the push matrix of the Sun’s position. Earth had a moon and mars had two, so the
+                    moons were in their push matrices respectively. </p>
+                <h5>What did I learn?</h5>
+                <p>I learnt how hard it was to implement movement based on the looking angle than what Unity or other
+                    game engines already does for you. Same goes for the hierarchal modelling. In Unity, it’s just a
+                    list of objects and dragging and dropping other objects into it. It’s also a lot more
+                    time-consuming placing objects where you want it to be, as it is all done by code, but it makes you
+                    more understandable of the low-level stuff instead of having game engines do it all for you.</p>
+
+                <h5>Links</h5>
+                <p>
+                    <a class="alert-link" href="https://github.com/awesomealvin/Computer-Graphics-A2_Solar-System">Source
+                        Code (GitHub)</a>
+                </p>
+                <p class="card-text">
+                    <iframe src="https://www.youtube.com/embed/-l-nivLNrEI" width="560" height="315" frameborder="0"
+                        allowfullscreen></iframe>
+                </p>
+            </div>
+        </div>
+
+        <!-- 2D ANIMATION -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-auto">
+                        <img class="mb-3" src="images/2danimation.jpg" alt="Card image cap" height="470px" width="470px">
+
+                    </div>
+                    <div class="col-sm">
+
+                        <h3 class="card-title">2D Animation</h3>
+                        <h5 class="card-subtitle mb-2 text-muted">University Project</h5>
+                        <h5 class="card-subtitle mb-2 text-muted">Java, OpenGL2</h5>
+
+                        <h5 class="mt-4">What is this?</h5>
+                        <p>This was the first assignment for our Computer Graphics course. It wasn’t really a game, but
+                            it quite similar to making one. We were tasked to create a 2D animated scene that included
+                            mandatory features such as randomly generated terrain and the features listed at the top in
+                            the image. The missile was an optional feature.</p>
+
+                        <h5>What were the main features and how did I implement them?</h5>
+                        <h5 class="text-muted">The Asteroids</h5>
+                        <p>The asteroids were spawned by a particle system that randomly chose a position on the screen
+                            and spawned them. It kept track of “dead” particles and would respawn them to conserve
+                            memory. The asteroids had its own class that generated a random shape and colour when
+                            created. I had tried to replicate Unity’s Vector2 and velocity system by creating my own
+                            Vector2 class and implementing the methods that helped with the movement of the asteroids.
+                            To get the asteroids to move, they had a Vector2 velocity, Vector2 position and a gravity
+                            scale to make them fall.</p>
+                    </div>
+                </div>
+                <h5 class="text-muted">The Missile</h5>
+                <p>The missile launcher also acted like a particle system that spawned the missiles. They spawned with
+                    a random angle, and with a bit of trigonometry, the Vector2 velocity could be calculated to send
+                    the missile into that direction. For collision detection, I created a bounds class that was very
+                    similar to Unity’s bounds class. It had the min and max values for the x and y which is basically a
+                    box. The class also had a method to check if the bounds was inside other bounds using the bound box
+                    collision method. So, the asteroids and missiles all had a bounds object each and used an n2 method
+                    to check each missile within each asteroid, which is pretty inefficient, but for a project this
+                    small was fine. </p>
+                <h5>What did I learn?</h5>
+                <p>I pretty much learnt the basics on how to render and animate 2D shapes using just a programming
+                    language (Java) and a library framework (OpenGL). It puts it into perspective of how much game
+                    engines such as Unity already does for you. I also learnt about the drawing and process methods
+                    that helped me a lot when I moved onto C++ and SDL.</p>
+
+                <h5>Links</h5>
+                <p>
+                    <a class="alert-link" href="https://github.com/awesomealvin/Computer-Graphics-A1-2DScene"">Source Code (GitHub)</a>
+                </p>
+                <p class="
+                        card-text">
+                        <iframe src="https://www.youtube.com/embed/UclSZClHs80" width="560" height="315" frameborder="0"
+                            allowfullscreen></iframe>
+                </p>
+
+
+
+            </div>
+        </div>
 
         <!-- METEOR -->
         <div class="card mb-3">
@@ -150,171 +433,88 @@
             </div>
         </div>
 
-        <!-- 2D ANIMATION -->
+        <!-- PHYSICS DEFENSE GAME -->
         <div class="card mb-3">
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-auto">
-                        <img class="mb-3" src="images/2danimation.jpg" alt="Card image cap" height="470px" width="470px">
+                        <img class="mb-3" src="images/physicsdefensegame.png" alt="Card image cap" width="640" height="360px">
 
                     </div>
                     <div class="col-sm">
 
-                        <h3 class="card-title">2D Animation</h3>
-                        <h5 class="card-subtitle mb-2 text-muted">University Project</h5>
-                        <h5 class="card-subtitle mb-2 text-muted">Java, OpenGL2</h5>
-
-                        <h5 class="mt-4">What is this?</h5>
-                        <p>This was the first assignment for our Computer Graphics course. It wasn’t really a game, but
-                            it quite similar to making one. We were tasked to create a 2D animated scene that included
-                            mandatory features such as randomly generated terrain and the features listed at the top in
-                            the image. The missile was an optional feature.</p>
-
-                        <h5>What were the main features and how did I implement them?</h5>
-                        <h5 class="text-muted">The Asteroids</h5>
-                        <p>The asteroids were spawned by a particle system that randomly chose a position on the screen
-                            and spawned them. It kept track of “dead” particles and would respawn them to conserve
-                            memory. The asteroids had its own class that generated a random shape and colour when
-                            created. I had tried to replicate Unity’s Vector2 and velocity system by creating my own
-                            Vector2 class and implementing the methods that helped with the movement of the asteroids.
-                            To get the asteroids to move, they had a Vector2 velocity, Vector2 position and a gravity
-                            scale to make them fall.</p>
-                    </div>
-                </div>
-                <h5 class="text-muted">The Missile</h5>
-                <p>The missile launcher also acted like a particle system that spawned the missiles. They spawned with
-                    a random angle, and with a bit of trigonometry, the Vector2 velocity could be calculated to send
-                    the missile into that direction. For collision detection, I created a bounds class that was very
-                    similar to Unity’s bounds class. It had the min and max values for the x and y which is basically a
-                    box. The class also had a method to check if the bounds was inside other bounds using the bound box
-                    collision method. So, the asteroids and missiles all had a bounds object each and used an n2 method
-                    to check each missile within each asteroid, which is pretty inefficient, but for a project this
-                    small was fine. </p>
-                <h5>What did I learn?</h5>
-                <p>I pretty much learnt the basics on how to render and animate 2D shapes using just a programming
-                    language (Java) and a library framework (OpenGL). It puts it into perspective of how much game
-                    engines such as Unity already does for you. I also learnt about the drawing and process methods
-                    that helped me a lot when I moved onto C++ and SDL.</p>
-
-                <h5>Links</h5>
-                <p class="card-text">
-                    <iframe src="https://www.youtube.com/embed/UclSZClHs80" width="560" height="315" frameborder="0"
-                        allowfullscreen></iframe>
-                </p>
-
-
-
-            </div>
-        </div>
-
-        <!-- 3D SOLAR SYSTEM -->
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-auto">
-                        <img class="mb-3" src="images/3dsolarsystem.png" alt="Card image cap" width="468px" height="317px">
-
-                    </div>
-                    <div class="col-sm">
-                        <h3 class="card-title">3D Solar System</h3>
-                        <h5 class="card-subtitle mb-2 text-muted">University Project</h5>
-                        <h5 class="card-subtitle mb-2 text-muted">Java, OpenGL2</h5>
+                        <h3 class="card-title">A Physics Defense Game</h3>
+                        <h5 class="card-subtitle mb-2 text-muted">Side Project</h5>
+                        <h5 class="card-subtitle mb-2 text-muted">C#, Unity</h5>
 
                         <h5 class="mt-4">What is it?</h5>
-                        <p>This was the second assignment for the computer graphics course. It focused on 3D models,
-                            hierarchal modelling and camera movement in 3D space.</p>
-
-                        <h5>Main Features and Implementation?</h5>
-                        <h5 class="text-muted">Camera Movement</h5>
-                        <p>The camera movement was the hardest part because moving forwards must take account where the
-                            camera is looking at. I took the hard approach and decided to learn about forward vectors
-                            and all that cross-product stuff when I could’ve just applied simple trigonometry..</p>
+                        <p>This mobile game is similar to Angry Birds (Rovio Entertainment, 2009), but instead of being
+                            the
+                            one attacking, you are the one defending. <br>
+                            You must try to defend your structure from getting demolished from the enemy cannons by
+                            shooting projectiles at the cannon balls. Each ammo type has a special ability that the
+                            player can activate after shooting. One of the abilities that have been implemented is the
+                            ability to slow down time, as well as being able to redirect the projectile again after
+                            shooting it once.
+                        </p>
                     </div>
                 </div>
-                <h5 class="text-muted">Push and Pop Matrix</h5>
-                <p>OpenGL had this nice push and pop matrix feature that allowed for hierarchal modelling. It was
-                    easily to understand and implement but is very useful. All the planets revolved around the Sun, so
-                    they were all in the push matrix of the Sun’s position. Earth had a moon and mars had two, so the
-                    moons were in their push matrices respectively. </p>
-                <h5>What did I learn?</h5>
-                <p>I learnt how hard it was to implement movement based on the looking angle than what Unity or other
-                    game engines already does for you. Same goes for the hierarchal modelling. In Unity, it’s just a
-                    list of objects and dragging and dropping other objects into it. It’s also a lot more
-                    time-consuming placing objects where you want it to be, as it is all done by code, but it makes you
-                    more understandable of the low-level stuff instead of having game engines do it all for you.</p>
+                <h5>Main Features and Implementation</h5>
+                <h5 class="text-muted">Enemy Cannon (Aiming and Shooting)</h5>
+                <p>The enemy cannon randomly selects a piece of structure present in the scene. It then selects a
+                    random point within that single selected structure. It then chooses a random angle to shoot from,
+                    but the angle is restricted so that it won’t be aiming behind. With the angle, it uses the
+                    equations of motions (acceleration, velocity-time, displacement-time and velocity-displacement)
+                    (The Physics Hypertextbook, n.d.) to calculate the amount of force needed to apply to the cannon
+                    ball so that it will hit the point of the structure it had selected.</p>
+                <br>The enemy cannon also uses a simple state machine by using boolean variables.
+                <h5 class="text-muted">The Player Cannon (Shooting)</h5>
+                <p>Shooting in this game works very similar to Angry Birds (Rovio Entertainment, 2009) where the player
+                    must touch and drag the screen, and then release to shoot. The difference is that the player can
+                    initially touch anywhere on the screen. The cannon has a maximum force that will be applied to the
+                    shot projectile and is determined by calculating the length of the point of the initial touch and
+                    the point of the last touch as the player let go of the screen. This is done by calculating the
+                    difference of both vector2 positions, and then calculating the magnitude of the difference.</p>
 
-                <h5>Links</h5>
-                <p class="card-text">
-                    <iframe src="https://www.youtube.com/embed/-l-nivLNrEI" width="560" height="315" frameborder="0"
-                        allowfullscreen></iframe>
+                <h5 class="text-muted">The Special Ability</h5>
+                <p>When the player touches the right side of the screen after shooting a projectile, it will activate
+                    the projectile’s ability. The ability (the only one implemented) will slow down time and allow the
+                    player to reshoot the projectile from its current position. The shooting works exactly the same as
+                    if it were shooting from the cannon. Slowing down the time is as simple as lowering the time scale.
+                    If the projectile hits an enemy projectile, then they are able to activate the ability once more.
+                    However, if the projectile touches the surface, then they can no longer use it. This is done by
+                    having a simple charge count where the count decrements when contact with anything but the enemy
+                    projectiles and incrementing if it does touch the enemy projectiles. </p>
+
+                <h5>What did I learn?</h5>
+                <p>Basic vector maths and trigonometry. I will never forget: Vector2 difference = Vector2 b – Vector2
+                    a. That difference holds a lot of information such as the distance between two vectors and the
+                    angle.
+                    I would also say I learnt those physics equations from the enemy cannon, but it’s been so long that
+                    I’ve forgotten how it works.
                 </p>
-            </div>
-        </div>
-
-        <!-- 3D ZOMBIE HELICOPTER SCENE -->
-        <div class="card mt-3">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-auto">
-                        <img class="mb-3" src="images/3dhelicopter.png" alt="Card image cap" width="468px" height="317px">
-
-                    </div>
-                    <div class="col-sm">
-
-                        <h3 class="card-title">3D Helicopter Zombie Scene</h3>
-                        <h5 class="card-subtitle mb-2 text-muted">University Project</h5>
-                        <h5 class="card-subtitle mb-2 text-muted">Java, OpenGL2</h5>
-
-                        <h5 class="mt-4">What is it?</h5>
-                        <p>This is the third and final assignment of the computer graphics course. We were tasked to
-                            create a 3D scene that has a camera flying around the scene. I decided to make a helicopter
-                            fly around an abandoned town full of zombies. And of course, you were able to shoot them
-                            with rockets.</p>
-
-
-                    </div>
-                </div>
-                <h5>Main Features and Implementation?</h5>
-                <h5 class="text-muted">The Helicopter Model</h5>
-                <p>The helicopter model consisted of glut solid cubes and one glu sphere for the body. Each
-                    part of the helicopter had its own class that was all included in the main helicopter
-                    class. This helicopter class handled the scaling and positions of where all the parts
-                    should be using push and pop matrices. Some of the classes such as the tail had other
-                    shapes included it in for the tail blade. It made sense in hierarchal modelling, which also
-                    made things a lot easier, as if I were to move the tail, then the tail blade would also
-                    move along with it.</p>
-                <h5 class="text-muted">Movement</h5>
-                <p>The forward movement of the helicopter is based on the tilt angle of the helicopter. So, pressing
-                    the forward button will tilt the helicopter forward, and vice versa with the backwards key. This
-                    felt similar to how games like Grand Theft Auto does their forward movements with helicopters, and
-                    I was happy with it. Though, the other controls such as strafing and rotating left/right didn’t
-                    feel the same as how the forward movement worked. </p>
-
-                <h5 class="text-muted">Shooting</h5>
-                <p>One of the main features were shooting rockets. The rockets were spawned using an object pool
-                    managed by the helicopter class. When shot, the rocket would have an applied velocity, and an angle
-                    the same as the helicopter when it was shot. When collided with the ground, buildings or the
-                    boundaries of the map, the rocket would spawn an explosion. The explosion would interpolate in size
-                    and detect collision for zombies using bounding spheres. </p>
-
-                <h5 class="text-muted">Zombies</h5>
-                <p>Zombies were modelled with just two glut solid cubes. One for the body, and one for the head. The
-                    head was textured with a stone wall, and coloured green. The zombies were managed like a particle
-                    system where if they died, they would respawn somewhere random in the map. The AI was very simple,
-                    as they would just walk in a single direction, and when contact with a wall, they would walk the
-                    opposite direction. </p>
-
-                <h5>What did I learn?</h5>
-                <p></p>
 
                 <h5>Links</h5>
+                <p>
+                    <a class="alert-link" href="https://github.com/awesomealvin/A-Physics-Defence-Game">Source
+                        Code (GitHub)</a>
+                </p>
                 <p class="card-text">
-                    <iframe src="https://www.youtube.com/embed/TRkf31bk_Wg" width="560" height="315" frameborder="0"
+                    <iframe src="https://www.youtube.com/embed/zRmPZTDG4MI" width="560" height="315" frameborder="0"
                         allowfullscreen></iframe>
                 </p>
 
             </div>
         </div>
+
+        <div>
+            <h3>References</h3>
+            <p>Rovio Entertainment. (2009, December 11). Rovio Games. Retrieved from Rovio: <a href=https://www.rovio.com/games>https://www.rovio.com/games
+                    </a> </p> <p>The Physics Hypertextbook. (n.d.). Projectiles. Retrieved from The Physics
+                    Hypertextbook: <a href="https://physics.info/projectiles/">https://physics.info/projectiles/</a></p>
+        </div>
+
+
 
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/jquery/jquery.min.js"></script>
